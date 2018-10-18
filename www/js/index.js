@@ -19,7 +19,6 @@
 var app = {
     // Application Constructor
     initialize: function() {
-		//this.initPush();
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -35,6 +34,9 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+		displayEvents();
+		document.getElementById("eventScreen").innerHTML = 'deviceready';
+		
 		var push = PushNotification.init({
             "android": {
                 "senderID": "416315380994"
@@ -45,6 +47,7 @@ var app = {
         
         push.on('registration', function(data) {
             console.log("registration event");
+			document.getElementById("eventScreen").innerHTML = 'registration event';
             //document.getElementById("regId").innerHTML = data.registrationId;
 			alert(data.registrationId);
             console.log(JSON.stringify(data));
@@ -53,28 +56,19 @@ var app = {
         push.on('notification', function(data) {
         	console.log("notification event");
             console.log(JSON.stringify(data));
-            var cards = document.getElementById("eventScreen");
-            var card = '<div class="row">' +
-		  		  '<div class="col s12 m6">' +
-				  '  <div class="card darken-1">' +
-				  '    <div class="card-content black-text">' +
-				  '      <span class="card-title black-text">' + data.title + '</span>' +
-				  '      <p>' + data.message + '</p>' +
-				  '    </div>' +
-				  '  </div>' +
-				  ' </div>' +
-				  '</div>';
-            cards.innerHTML += card;
             
+			document.getElementById("eventScreen").innerHTML = 'notification event';
+			
             push.finish(function () {
                 console.log('finish successfully called');
 				
-				displayEvents();
+				document.getElementById("eventScreen").innerHTML = 'registered';
             });
         });
 
         push.on('error', function(e) {
             console.log("push error");
+			document.getElementById("eventScreen").innerHTML = 'push error';
         });
     },
     // Update DOM on a Received Event
