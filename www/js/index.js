@@ -46,7 +46,7 @@ var app = {
 
         console.log('Received Event: ' + id);
 		if(confirm('ready to go?')){
-			window.location = "http://public.mitterhuemer.at/events.php";
+			window.location.href = "http://public.mitterhuemer.at/events.php";
 		}
     }
 };
