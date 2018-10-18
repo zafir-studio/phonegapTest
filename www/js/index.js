@@ -46,8 +46,50 @@ var app = {
         console.log('Received Event: ' + id);
 		
 		// eigene Funktionen
-		displayEvents();
+		
+		var push = PushNotification.init({
+		  "android": {
+			"senderID": "416315380994"
+		  },
+		  "browser": {},
+		  "ios": {
+			"sound": true,
+			"vibration": true,
+			"badge": true
+		  },
+		  "windows": {}
+		});
+		
+		push.on('registration', function(data) {
+		  console.log('registration event: ' + data.registrationId);
 
+		  var oldRegId = localStorage.getItem('registrationId');
+		  if (oldRegId !== data.registrationId) {
+			// Save new registration ID
+			localStorage.setItem('registrationId', data.registrationId);
+			// Post registrationId to your app server as the value has changed
+		  }
+
+			displayEvents();
+		});
+		
+		push.on('error', function(e) {
+		  console.log("push error = " + e.message);
+		});
+		
+		
+		push.on('notification', function(data) {
+		  console.log('notification event');
+		  navigator.notification.alert(
+			data.message,         // message
+			null,                 // callback
+			data.title,           // title
+			'Ok'                  // buttonName
+		  );
+		});
+		
+		
+		
     }
 };
 
@@ -56,3 +98,26 @@ function displayEvents(){
 		document.getElementById('connectScreen').style.display = 'none';
 		document.getElementById('eventScreen').style.display = 'block';
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
