@@ -34,7 +34,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		window.location.replace("http://public.mitterhuemer.at/events.php");
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -46,5 +45,6 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+		window.location.replace("http://public.mitterhuemer.at/events.php");
     }
 };
