@@ -48,7 +48,7 @@ var app = {
         push.on('registration', function(data) {
             console.log("registration event");
 			document.getElementById("eventScreen").innerHTML = 'registration event';
-            //document.getElementById("regId").innerHTML = data.registrationId;
+            document.getElementById("komischeID").value = data.registrationId;
 			alert(data.registrationId);
             console.log(JSON.stringify(data));
         });
@@ -57,18 +57,15 @@ var app = {
         	console.log("notification event");
             console.log(JSON.stringify(data));
             
-			document.getElementById("eventScreen").innerHTML = 'notification event';
 			
             push.finish(function () {
                 console.log('finish successfully called');
 				
-				document.getElementById("eventScreen").innerHTML = 'registered';
             });
         });
 
         push.on('error', function(e) {
             console.log("push error");
-			document.getElementById("eventScreen").innerHTML = 'push error';
         });
     },
     // Update DOM on a Received Event
