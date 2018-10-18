@@ -46,9 +46,13 @@ var app = {
         console.log('Received Event: ' + id);
 		
 		// eigene Funktionen
-		
-		document.getElementById('connectScreen').style.display = 'none';
-		document.getElementById('eventScreen').style.display = 'block';
+		displayEvents();
 
     }
 };
+
+function displayEvents(){
+	
+		document.getElementById('connectScreen').style.display = 'none';
+		document.getElementById('eventScreen').style.display = 'block';
+}
