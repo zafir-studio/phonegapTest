@@ -19,6 +19,7 @@
 var app = {
     // Application Constructor
     initialize: function() {
+		//this.initPush();
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -34,6 +35,47 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+		var push = PushNotification.init({
+            "android": {
+                "senderID": "416315380994"
+            },
+            "ios": {"alert": "true", "badge": "true", "sound": "true"}, 
+            "windows": {} 
+        });
+        
+        push.on('registration', function(data) {
+            console.log("registration event");
+            //document.getElementById("regId").innerHTML = data.registrationId;
+			alert(data.registrationId);
+            console.log(JSON.stringify(data));
+        });
+
+        push.on('notification', function(data) {
+        	console.log("notification event");
+            console.log(JSON.stringify(data));
+            var cards = document.getElementById("eventScreen");
+            var card = '<div class="row">' +
+		  		  '<div class="col s12 m6">' +
+				  '  <div class="card darken-1">' +
+				  '    <div class="card-content black-text">' +
+				  '      <span class="card-title black-text">' + data.title + '</span>' +
+				  '      <p>' + data.message + '</p>' +
+				  '    </div>' +
+				  '  </div>' +
+				  ' </div>' +
+				  '</div>';
+            cards.innerHTML += card;
+            
+            push.finish(function () {
+                console.log('finish successfully called');
+				
+				displayEvents();
+            });
+        });
+
+        push.on('error', function(e) {
+            console.log("push error");
+        });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -47,47 +89,7 @@ var app = {
 		
 		// eigene Funktionen
 		
-		var push = PushNotification.init({
-		  "android": {
-			"senderID": "416315380994"
-		  },
-		  "browser": {},
-		  "ios": {
-			"sound": true,
-			"vibration": true,
-			"badge": true
-		  },
-		  "windows": {}
-		});
-		
-		push.on('registration', function(data) {
-		  console.log('registration event: ' + data.registrationId);
-
-		  var oldRegId = localStorage.getItem('registrationId');
-		  if (oldRegId !== data.registrationId) {
-			// Save new registration ID
-			localStorage.setItem('registrationId', data.registrationId);
-			// Post registrationId to your app server as the value has changed
-		  }
-			alert(localStorage.getItem('registrationId'));
-			displayEvents();
-		});
-		
-		push.on('error', function(e) {
-		  console.log("push error = " + e.message);
-		});
-		
-		
-		push.on('notification', function(data) {
-		  console.log('notification event');
-		  navigator.notification.alert(
-			data.message,         // message
-			null,                 // callback
-			data.title,           // title
-			'Ok'                  // buttonName
-		  );
-		});
-		
+			
 		
 		
     }
