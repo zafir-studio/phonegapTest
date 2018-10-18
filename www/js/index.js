@@ -45,6 +45,8 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-		window.location.replace("http://public.mitterhuemer.at/events.php");
+		if(confirm('ready to go?')){
+			window.location = "http://public.mitterhuemer.at/events.php";
+		}
     }
 };
