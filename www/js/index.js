@@ -42,11 +42,13 @@ var app = {
         var receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
+        receivedElement.setAttribute('style', 'display:none;');
         console.log('Received Event: ' + id);
-		if(confirm('ready to go?')){
-			window.location.href = "http://public.mitterhuemer.at/events.php";
-		}
+		
+		// eigene Funktionen
+		
+		document.getElementById('connectScreen').style.display = 'none';
+		document.getElementById('eventScreen').style.display = 'block';
+
     }
 };
