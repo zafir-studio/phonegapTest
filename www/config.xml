@@ -29,7 +29,7 @@
 	  <resource-file src="google-services.json" target="google-services.json" />
 	</platform>
 	<preference name="android-build-tool" value="gradle" />
-	<plugin name="phonegap-plugin-push" source="npm">
+	<plugin name="cordova-plugin-push" source="npm">
 		<param name="SENDER_ID" value="416315380994" />
 	</plugin>
 
