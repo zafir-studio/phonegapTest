@@ -39,7 +39,7 @@ var app = {
 		
 		var push = PushNotification.init({
             "android": {
-                //"senderID": "416315380994"
+                "senderID": "416315380994"
             },
             "ios": {"alert": "true", "badge": "true", "sound": "true"}, 
             "windows": {} 
