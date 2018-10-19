@@ -44,12 +44,13 @@ var app = {
             "ios": {"alert": "true", "badge": "true", "sound": "true"}, 
             "windows": {} 
         });
-        
+		
+        //e8xYqxD4VF0:APA91bGbUUgNUbPq57aAUbLcnawEz5OkVbANU9sk8XIBlEL_ZzahqYv0gr5EeU-bPap9GSOu4xw-Q5PyFIfH1JhVVM0P7WdmwkB9wwtQY8Tz3AEsmfeRT_0f09V2bphM_5Y8VSPRwJqP
         push.on('registration', function(data) {
             console.log("registration event");
 			document.getElementById("eventScreen").innerHTML = 'registration event';
             document.getElementById("komischeID").value = data.registrationId;
-			alert(data.registrationId);
+			alert(JSON.stringify(data));
             console.log(JSON.stringify(data));
         });
 
